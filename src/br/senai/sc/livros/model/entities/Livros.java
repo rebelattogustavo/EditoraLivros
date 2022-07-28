@@ -15,6 +15,10 @@ public class Livros {
         this.status = status;
     }
 
+    public Livros() {
+
+    }
+
 
     public static Livros cadastrar(String titulo,  int isbn, int qtdPag, Autores autor) {
         return new Livros(titulo, isbn, qtdPag, autor, Status.AGUARDANDO_REVISAO);
