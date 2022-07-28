@@ -20,6 +20,7 @@ public class Login extends JFrame implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 PessoaController controller = new PessoaController();
                 if(controller.validalogin(emailInput.getText(), passwordInput.getText())){
+//                    dispose();
                     Menu menu = new Menu();
                     menu.setVisible(true);
                 }

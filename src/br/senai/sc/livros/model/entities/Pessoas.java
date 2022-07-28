@@ -1,9 +1,12 @@
 package br.senai.sc.livros.model.entities;
 
-public class Pessoas {
-    String nome, sobrenome, email, senha, cpf, genero;
+import br.senai.sc.livros.model.service.PessoaService;
 
-    public Pessoas(String nome, String sobrenome, String email, String senha, String cpf, String genero) {
+public class Pessoas {
+    String nome, sobrenome, email, senha, cpf;
+    Genero genero;
+
+    public Pessoas(String nome, String sobrenome, String email, String senha, String cpf, Genero genero) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -53,11 +56,12 @@ public class Pessoas {
     }
 
     public String getGenero() {
-        return genero;
+        return genero.nome;
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        this.genero = Genero.valueOf(genero);
+
     }
 
     public boolean validalogin(String email, String senha){
@@ -67,8 +71,8 @@ public class Pessoas {
         throw new RuntimeException();
     }
 
-    public void cadastrar(String nome, String sobrenome, String email, String senha, String cpf, String genero){
-
+    public static Pessoas cadastrar(String nome, String sobrenome, String email, String senha, String cpf, Genero genero){
+        return new Pessoas(nome, sobrenome, email, senha, cpf, genero);
     }
 
 }

@@ -4,7 +4,8 @@ public class Livros {
     private Autores autor;
     private Editoras editora;
     private String titulo;
-    private int status, isbn, qtdPag;
+    private int isbn, qtdPag;
+    private Status status;
 
     public Autores getAutor() {
         return autor;
@@ -31,11 +32,12 @@ public class Livros {
     }
 
     public int getStatus() {
-        return status;
+        return status.ordinal();
     }
 
+
     public void setStatus(int status) {
-        this.status = status;
+        this.status = Status.values()[status];
     }
 
     public int getIsbn() {

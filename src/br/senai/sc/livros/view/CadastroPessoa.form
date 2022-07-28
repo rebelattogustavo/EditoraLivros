@@ -119,15 +119,17 @@
               <text value="Confirmar Senha"/>
             </properties>
           </component>
-          <component id="fc077" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="fc077" class="javax.swing.JTextField" binding="nomeInput">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value=""/>
+            </properties>
           </component>
-          <component id="28695" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="28695" class="javax.swing.JTextField" binding="sobrenomeInput">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -135,7 +137,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="6c984" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="6c984" class="javax.swing.JTextField" binding="emailInput">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -143,7 +145,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="be2fb" class="javax.swing.JTextField" default-binding="true">
+          <component id="be2fb" class="javax.swing.JTextField" binding="cpfInput">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -151,15 +153,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="1c932" class="javax.swing.JTextField" default-binding="true">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="5547b" class="javax.swing.JTextField" default-binding="true">
+          <component id="c974b" class="javax.swing.JPasswordField" binding="senhaInput">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -167,13 +161,25 @@
             </constraints>
             <properties/>
           </component>
-          <component id="2160b" class="javax.swing.JTextField" default-binding="true">
+          <component id="f806d" class="javax.swing.JPasswordField" binding="confirmaSenhaInput">
             <constraints>
               <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties/>
+          </component>
+          <component id="a8c01" class="javax.swing.JComboBox" binding="generoInput">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="Masculino"/>
+                <item value="Feminino"/>
+                <item value="Outro"/>
+              </model>
+            </properties>
           </component>
         </children>
       </grid>
