@@ -7,16 +7,19 @@ import br.senai.sc.livros.model.service.PessoaService;
 
 public class PessoaController {
 
-    Pessoas pessoa;
+    Pessoas model;
 
-    public boolean validalogin(String email, String senha) {
+    public Pessoas validaLogin(String email, String senha) {
         PessoaService service = new PessoaService();
-        pessoa = service.selecionarEmail(email);
-        return pessoa.validalogin(email, senha);
+        model = service.selecionarEmail(email);
+        return model.validaLogin(senha);
     }
 
-    public void cadastrar(String nome, String sobrenome, String email, String senha, String cpf, Object genero){
+    public void cadastrar(String nome, String sobrenome, String email, String senha,
+                          String cpf, Object genero, String confSenha){
+
+        Pessoas pessoa = Pessoas.cadastrar(nome, sobrenome, email, senha, cpf, (Genero) genero, confSenha);
         PessoaService service = new PessoaService();
-        service.inserir(Pessoas.cadastrar(nome, sobrenome, email, senha, cpf, (Genero) genero));
+        service.inserir(pessoa);
     }
 }

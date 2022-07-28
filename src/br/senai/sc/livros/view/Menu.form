@@ -42,8 +42,8 @@
             </constraints>
             <properties>
               <background color="-16775062"/>
-              <enabled value="false"/>
-              <foreground color="-58112"/>
+              <enabled value="true"/>
+              <foreground color="-789"/>
               <hideActionText value="false"/>
               <text value="Sair"/>
             </properties>
@@ -57,7 +57,16 @@
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="4977a" class="javax.swing.JButton" binding="cadastrarLivroButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Cadastrar livro"/>
+            </properties>
+          </component>
+        </children>
       </grid>
     </children>
   </grid>

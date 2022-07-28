@@ -7,6 +7,19 @@ public class Livros {
     private int isbn, qtdPag;
     private Status status;
 
+    public Livros(String titulo, int isbn, int qtdPag, Autores autor, Status status) {
+        this.titulo = titulo;
+        this.isbn = isbn;
+        this.qtdPag = qtdPag;
+        this.autor = autor;
+        this.status = status;
+    }
+
+
+    public static Livros cadastrar(String titulo,  int isbn, int qtdPag, Autores autor) {
+        return new Livros(titulo, isbn, qtdPag, autor, Status.AGUARDANDO_REVISAO);
+    }
+
     public Autores getAutor() {
         return autor;
     }
@@ -55,4 +68,6 @@ public class Livros {
     public void setQtdPag(int qtdPag) {
         this.qtdPag = qtdPag;
     }
+
+
 }

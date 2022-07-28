@@ -64,15 +64,22 @@ public class Pessoas {
 
     }
 
-    public boolean validalogin(String email, String senha){
-        if(this.getSenha().equals(senha)){
-            return true;
+    public Pessoas validaLogin(String senha) {
+        if (this.getSenha().equals(senha)) {
+            return this;
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Senha incorreta");
     }
 
-    public static Pessoas cadastrar(String nome, String sobrenome, String email, String senha, String cpf, Genero genero){
-        return new Pessoas(nome, sobrenome, email, senha, cpf, genero);
+    public static Pessoas cadastrar(String nome, String sobrenome, String email,
+                                    String senha, String cpf, Genero genero, String confSenha) {
+        if (senha.equals(confSenha)) {
+            if (email.contains("@")) {
+                return new Pessoas(nome, sobrenome, email, senha, cpf, genero);
+            }
+            throw new RuntimeException("E-mail incorreto");
+        }
+        throw new RuntimeException("Senhas não conferem");
     }
 
 }

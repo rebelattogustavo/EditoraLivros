@@ -27,23 +27,30 @@ public class CadastroPessoa extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 Login login = new Login();
-                login.setVisible(true);
+                login.run();
             }
         });
         CADASTRARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                if (senhaInput.getText().equals(confirmaSenhaInput.getText())) {
-                    PessoaController pessoaController = new PessoaController();
-                    pessoaController.cadastrar(nomeInput.getText(), sobrenomeInput.getText(), emailInput.getText(),
-                            senhaInput.getText(), cpfInput.getText(), generoInput.getSelectedItem());
-                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-                    dispose();
-                    Login login = new Login();
-                    login.setVisible(true);
+                if (nomeInput.getText().isEmpty() || sobrenomeInput.getText().isEmpty() ||
+                        emailInput.getText().isEmpty() || cpfInput.getText().isEmpty() || senhaInput.getText().isEmpty()
+                        || confirmaSenhaInput.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Há um ou mais campos vazios!\n" +
+                            "Preencha os campos novamente!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Senhas não conferem");
+                    PessoaController controller = new PessoaController();
+                    try {
+                        controller.cadastrar(nomeInput.getText(), sobrenomeInput.getText(), emailInput.getText(),
+                                senhaInput.getText(), cpfInput.getText(), (Genero) generoInput.getSelectedItem(),
+                                confirmaSenhaInput.getText());
+                        dispose();
+                        JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                        Login login = new Login();
+                        login.setVisible(true);
+                    } catch (Exception exception) {
+                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    }
                 }
             }
         });

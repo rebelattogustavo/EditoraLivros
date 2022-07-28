@@ -1,6 +1,7 @@
 package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.PessoaController;
+import br.senai.sc.livros.model.entities.Pessoas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,10 +20,14 @@ public class Login extends JFrame implements Runnable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 PessoaController controller = new PessoaController();
-                if(controller.validalogin(emailInput.getText(), passwordInput.getText())){
-//                    dispose();
-                    Menu menu = new Menu();
-                    menu.setVisible(true);
+                try{
+                    Pessoas pessoa = controller.validaLogin(emailInput.getText(), passwordInput.getText());
+                        dispose();
+                        Menu menu = new Menu(pessoa);
+                        menu.setVisible(true);
+
+                }catch (Exception exception){
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
             }
         });

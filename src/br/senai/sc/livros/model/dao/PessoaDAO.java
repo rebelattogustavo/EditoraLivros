@@ -22,7 +22,7 @@ public class PessoaDAO {
                 return pessoa;
             }
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Pessoa não encontrada");
     }
     public Pessoas selecionarEmail(String email){
         for (Pessoas pessoa : listaPessoas){
@@ -30,7 +30,7 @@ public class PessoaDAO {
                 return pessoa;
             }
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Email não encontrado");
     }
 
     public void atualizar(String cpf, Pessoas pessoaAtt){

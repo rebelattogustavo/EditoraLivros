@@ -94,7 +94,7 @@
             <properties>
               <background color="-58112"/>
               <enabled value="true"/>
-              <foreground color="-16777216"/>
+              <foreground color="-1"/>
               <text value="Cadastrar-se"/>
             </properties>
           </component>
@@ -106,8 +106,8 @@
               <background color="-16760065"/>
               <enabled value="true"/>
               <font name="Courier New" size="12" style="0"/>
-              <foreground color="-16777216"/>
-              <hideActionText value="true"/>
+              <foreground color="-1"/>
+              <hideActionText value="false"/>
               <text value="Login"/>
             </properties>
           </component>

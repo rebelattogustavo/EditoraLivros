@@ -3,6 +3,8 @@ package br.senai.sc.livros.controller;
 import br.senai.sc.livros.model.entities.Autores;
 import br.senai.sc.livros.model.entities.Editoras;
 import br.senai.sc.livros.model.entities.Livros;
+import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.service.LivroService;
 
 public class LivrosController {
 
@@ -55,4 +57,12 @@ public class LivrosController {
     public void setQtdPag(int qtdPag) {
         livro.setQtdPag(qtdPag);
     }
+
+    public void cadastrar(String titulo, int isbn, Pessoas pessoa, int qtdPag){
+        Livros livro;
+        livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
+        LivroService service = new LivroService();
+
+    }
+
 }
