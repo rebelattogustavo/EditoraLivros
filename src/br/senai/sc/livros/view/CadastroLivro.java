@@ -33,6 +33,14 @@ public class CadastroLivro extends JFrame {
                 }
             }
         });
+        VOLTARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Menu menu = new Menu(pessoa);
+                menu.setVisible(true);
+            }
+        });
     }
 
     private void criarComponentes() {

@@ -1,20 +1,30 @@
 package br.senai.sc.livros.model.dao;
 
+import br.senai.sc.livros.model.entities.Genero;
 import br.senai.sc.livros.model.entities.Livros;
 import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.service.PessoaService;
 
 import java.util.ArrayList;
 
 public class PessoaDAO {
     private static ArrayList<Pessoas> listaPessoas = new ArrayList<>();
 
-    public void inserir(Pessoas pessoa){
+
+    static {
+        Pessoas guga = new Pessoas("Guga", "Guga", "1@", "123", "123456789", Genero.MASCULINO);
+        listaPessoas.add(guga);
+    }
+
+    public static void inserir(Pessoas pessoa){
         listaPessoas.add(pessoa);
     }
 
     public void remover(Pessoas pessoa){
         listaPessoas.remove(pessoa);
     }
+
+
 
     public Pessoas selecionarCpf(String cpf){
         for (Pessoas pessoa : listaPessoas){

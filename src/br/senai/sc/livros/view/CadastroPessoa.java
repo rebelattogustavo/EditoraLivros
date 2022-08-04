@@ -3,6 +3,7 @@ package br.senai.sc.livros.view;
 import br.senai.sc.livros.controller.PessoaController;
 import br.senai.sc.livros.model.entities.Genero;
 import br.senai.sc.livros.model.entities.Gerentes;
+import br.senai.sc.livros.model.entities.Pessoas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -46,8 +47,13 @@ public class CadastroPessoa extends JFrame {
                                 confirmaSenhaInput.getText());
                         dispose();
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                        Login login = new Login();
-                        login.setVisible(true);
+                        if(Menu.userlogged() == null){
+                            Login login = new Login();
+                            login.setVisible(true);
+                        }else{
+                            Menu menu = new Menu(Menu.userlogged());
+                            menu.setVisible(true);
+                        }
                     } catch (Exception exception) {
                         JOptionPane.showMessageDialog(null, exception.getMessage());
                     }

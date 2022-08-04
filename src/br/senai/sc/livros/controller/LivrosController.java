@@ -6,6 +6,8 @@ import br.senai.sc.livros.model.entities.Livros;
 import br.senai.sc.livros.model.entities.Pessoas;
 import br.senai.sc.livros.model.service.LivroService;
 
+import java.util.ArrayList;
+
 public class LivrosController {
 
     Livros livro = new Livros();
@@ -62,7 +64,16 @@ public class LivrosController {
         Livros livro;
         livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
         LivroService service = new LivroService();
+    }
 
+    public ArrayList<Livros> buscarLista(){
+        LivroService service = new LivroService();
+        return service.buscarLista();
+    }
+
+    public ArrayList<Livros> selecionarPorAutor(Autores autor){
+        LivroService service = new LivroService();
+        return service.selecionarPorAutor(autor);
     }
 
 }
