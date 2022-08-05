@@ -26,7 +26,6 @@ public class Menu extends JFrame implements ActionListener {
     public Menu(Pessoas pessoa) {
         usuario = pessoa;
         criarComponentes();
-
     }
 
 
@@ -51,7 +50,7 @@ public class Menu extends JFrame implements ActionListener {
             cadastrarRevisorButton.setVisible(false);
         }
         if(usuario instanceof Diretores || usuario instanceof Revisores){
-            cadastrarLivroButton.setVisible(true);
+            cadastrarLivroButton.setVisible(false);
         }
     }
 
@@ -68,12 +67,12 @@ public class Menu extends JFrame implements ActionListener {
 
         } else if (e.getActionCommand().equals("listarLivros")) {
             dispose();
-            Estante estante = new Estante();
+            Estante estante = new Estante(1);
             estante.setVisible(true);
         } else if (e.getActionCommand().equals("listarAtividades")) {
             dispose();
-//            ListarAtividades listar = new ListarAtividades();
-//            listar.setVisible(true);
+            Estante estante = new Estante(2);
+            estante.setVisible(true);
         } else if (e.getActionCommand().equals("editarLivros")) {
             dispose();
 //            EditarLivros editar = new EditarLivros();

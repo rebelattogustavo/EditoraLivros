@@ -1,6 +1,7 @@
 package br.senai.sc.livros.model.entities;
 
 import br.senai.sc.livros.model.service.PessoaService;
+import br.senai.sc.livros.view.Menu;
 
 public class Pessoas {
     String nome, sobrenome, email, senha, cpf;
@@ -75,7 +76,11 @@ public class Pessoas {
                                     String senha, String cpf, Genero genero, String confSenha) {
         if (senha.equals(confSenha)) {
             if (email.contains("@")) {
-                return new Pessoas(nome, sobrenome, email, senha, cpf, genero);
+                if(Menu.userlogged() instanceof Diretores){
+                    return new Revisores(nome, sobrenome, email, senha, cpf, genero);
+                }else {
+                    return new Autores(nome, sobrenome, email, senha, cpf, genero);
+                }
             }
             throw new RuntimeException("E-mail incorreto");
         }

@@ -1,8 +1,6 @@
 package br.senai.sc.livros.model.dao;
 
-import br.senai.sc.livros.model.entities.Genero;
-import br.senai.sc.livros.model.entities.Livros;
-import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.entities.*;
 import br.senai.sc.livros.model.service.PessoaService;
 
 import java.util.ArrayList;
@@ -13,7 +11,14 @@ public class PessoaDAO {
 
     static {
         Pessoas guga = new Pessoas("Guga", "Guga", "1@", "123", "123456789", Genero.MASCULINO);
+        Autores asa = new Autores("Asa", "Asa", "2@", "123", "12", Genero.MASCULINO);
+        Revisores jose = new Revisores("Jose", "Jose", "3@", "123", "23", Genero.MASCULINO);
+        Diretores maria = new Diretores("Maria", "Maria", "4@", "123", "34", Genero.FEMININO);
+
         listaPessoas.add(guga);
+        listaPessoas.add(asa);
+        listaPessoas.add(jose);
+        listaPessoas.add(maria);
     }
 
     public static void inserir(Pessoas pessoa){

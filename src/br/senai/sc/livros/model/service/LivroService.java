@@ -2,6 +2,8 @@ package br.senai.sc.livros.model.service;
 
 import br.senai.sc.livros.model.dao.LivrosDAO;
 import br.senai.sc.livros.model.entities.Livros;
+import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.entities.Status;
 
 import java.util.ArrayList;
 
@@ -27,4 +29,19 @@ public class LivroService {
     public ArrayList<Livros> buscarLista(){
         return acesso.buscarLista();
     }
+
+    public ArrayList<Livros> selecionarPorAutor(Pessoas autor) {
+        return acesso.selecionarPorAutor(autor);
+    }
+
+    public ArrayList<Livros> selecionarPorStatus(Status status) {
+        return acesso.selecionarPorStatus(status);
+    }
+
+    public ArrayList<Livros> selecionarAtividadesAutor(Pessoas autor) {
+        return acesso.selecionarAtividadesAutor(autor);
+    }
+
+
+
 }

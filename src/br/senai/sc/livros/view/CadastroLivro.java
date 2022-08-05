@@ -1,6 +1,7 @@
 package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.LivrosController;
+import br.senai.sc.livros.controller.PessoaController;
 import br.senai.sc.livros.model.entities.Genero;
 import br.senai.sc.livros.model.entities.Pessoas;
 
@@ -16,6 +17,7 @@ public class CadastroLivro extends JFrame {
     private JTextField qtdPagInput;
     private JPanel cadastroLivro;
 
+
     public CadastroLivro(Pessoas pessoa) {
         criarComponentes();
         CADASTRARButton.addActionListener(new ActionListener() {
@@ -27,12 +29,20 @@ public class CadastroLivro extends JFrame {
                             "Preencha todos os campos!");
                 } else {
                     LivrosController controller = new LivrosController();
-                    controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()), pessoa,
-                            Integer.parseInt(qtdPagInput.getText()));
-                    JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+                    try{
+                        controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
+                                Integer.parseInt(qtdPagInput.getText()), pessoa);
+                        dispose();
+                        JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+                        Menu menu = new Menu(Menu.userlogged());
+                        menu.setVisible(true);
+                    }catch (Exception exception){
+                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    }
                 }
             }
         });
+
         VOLTARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

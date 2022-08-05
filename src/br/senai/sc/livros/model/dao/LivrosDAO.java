@@ -10,9 +10,20 @@ public class LivrosDAO {
 
 
     static {
-    Autores autor = new Autores("Stephen", "King", "J@", "123", "123", Genero.MASCULINO);
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        Autores autor = new Autores("Stephen", "King", "J@", "123", "123", Genero.MASCULINO);
         Livros livro = new Livros("Stranger Things", 1, 200, autor, Status.AGUARDANDO_REVISAO);
+        Autores autor2 = (Autores) pessoaDAO.selecionarCpf("12");
+        Livros livro2 = new Livros("Stranger Things", 1, 200, autor2, Status.AGUARDANDO_EDICAO);
+        Livros livro3 = new Livros("Harry Poter", 1, 200, autor2, Status.EM_REVISAO);
+        Livros livro4 = new Livros("Ghostbuster", 1, 200, autor2, Status.APROVADO);
+
         listaLivros.add(livro);
+        listaLivros.add(livro2);
+        listaLivros.add(livro3);
+        listaLivros.add(livro4);
+
+
     }
 
     public void inserir(Livros livro){
@@ -57,6 +68,16 @@ public class LivrosDAO {
         ArrayList<Livros> livrosAutor = new ArrayList<>();
         for(Livros livro : listaLivros){
             if(livro.getStatus().equals(status)){
+                livrosAutor.add(livro);
+            }
+        }
+        return livrosAutor;
+    }
+
+    public ArrayList<Livros> selecionarAtividadesAutor(Pessoas autor){
+        ArrayList<Livros> livrosAutor = new ArrayList<>();
+        for(Livros livro : listaLivros){
+            if(livro.getAutor().equals(autor) && livro.getStatus().equals(Status.AGUARDANDO_EDICAO)){
                 livrosAutor.add(livro);
             }
         }
