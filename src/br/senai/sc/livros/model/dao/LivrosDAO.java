@@ -12,11 +12,11 @@ public class LivrosDAO {
     static {
         PessoaDAO pessoaDAO = new PessoaDAO();
         Autores autor = new Autores("Stephen", "King", "J@", "123", "123", Genero.MASCULINO);
-        Livros livro = new Livros("Stranger Things", 1, 200, autor, Status.AGUARDANDO_REVISAO);
+        Livros livro = new Livros("Robert Downey", 1, 200, autor, Status.AGUARDANDO_REVISAO);
         Autores autor2 = (Autores) pessoaDAO.selecionarCpf("12");
-        Livros livro2 = new Livros("Stranger Things", 1, 200, autor2, Status.AGUARDANDO_EDICAO);
-        Livros livro3 = new Livros("Harry Poter", 1, 200, autor2, Status.EM_REVISAO);
-        Livros livro4 = new Livros("Ghostbuster", 1, 200, autor2, Status.APROVADO);
+        Livros livro2 = new Livros("Stranger Things", 2, 200, autor2, Status.AGUARDANDO_EDICAO);
+        Livros livro3 = new Livros("Harry Poter", 3, 200, autor2, Status.EM_REVISAO);
+        Livros livro4 = new Livros("Ghostbuster", 4, 200, autor2, Status.APROVADO);
 
         listaLivros.add(livro);
         listaLivros.add(livro2);
@@ -56,9 +56,10 @@ public class LivrosDAO {
     }
 
     public ArrayList<Livros> selecionarPorAutor(Pessoas autor){
+        System.out.println(autor.getNome());
         ArrayList<Livros> livrosAutor = new ArrayList<>();
-        for(Livros livro : listaLivros){
-            if(livro.getAutor().equals(autor)){
+        for(Livros livro : listaLivros) {
+            if (livro.getAutor().equals(autor)) {
                 livrosAutor.add(livro);
             }
         }
