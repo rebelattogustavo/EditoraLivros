@@ -67,7 +67,7 @@ public class LivrosController {
             LivroService service = new LivroService();
             service.inserir(livro);
         } else {
-            CadastroLivro cadastroLivro = new CadastroLivro(pessoa);
+            CadastroLivro cadastroLivro = new CadastroLivro(pessoa, 1, null);
             cadastroLivro.setVisible(false);
             JOptionPane.showMessageDialog(null, "ISBN já existe!");
         }

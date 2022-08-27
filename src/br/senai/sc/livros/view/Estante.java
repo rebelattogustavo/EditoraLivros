@@ -28,14 +28,9 @@ public class Estante extends JFrame {
                 if(Menu.userlogged() instanceof Revisores || Menu.userlogged() instanceof Diretores){
                     ModalStatus modalStatus = new ModalStatus(isbn);
                     modalStatus.setVisible(true);
-                    dispose();
-                    Estante estante = new Estante(lista);
-                    estante.setVisible(true);
                 }else {
-                    controller.editarLivro(isbn, 3);
                     dispose();
-                    Estante estante = new Estante(lista);
-                    estante.setVisible(true);
+                    CadastroLivro cadastroLivro = new CadastroLivro(Menu.userlogged(), 2, )
                 }
             }
         });
@@ -51,6 +46,8 @@ public class Estante extends JFrame {
             }
         });
     }
+
+
 
     private void criarComponentes() {
         LivrosController controller = new LivrosController();

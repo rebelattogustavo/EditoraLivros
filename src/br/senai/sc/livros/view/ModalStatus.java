@@ -22,10 +22,12 @@ public class ModalStatus extends JFrame{
         aguardandoRevisãoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 1);
                 dispose();
                 Estante estante = new Estante(2);
+                estante.setVisible(false);
+                dispose();
+                LivrosController controller = new LivrosController();
+                controller.editarLivro(isbn, 1);
                 estante.setVisible(true);
             }
         });

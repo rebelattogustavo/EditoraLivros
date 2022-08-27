@@ -3,7 +3,9 @@ package br.senai.sc.livros.view;
 import br.senai.sc.livros.controller.LivrosController;
 import br.senai.sc.livros.controller.PessoaController;
 import br.senai.sc.livros.model.entities.Genero;
+import br.senai.sc.livros.model.entities.Livros;
 import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.service.LivroService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +18,11 @@ public class CadastroLivro extends JFrame {
     private JTextField isbnInput;
     private JTextField qtdPagInput;
     private JPanel cadastroLivro;
+    private LivroService service = new LivroService();
 
 
-    public CadastroLivro(Pessoas pessoa) {
-        criarComponentes();
+    public CadastroLivro(Pessoas pessoa, int opcao, String isbn) {
+        criarComponentes(opcao, isbn);
         CADASTRARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,15 +32,24 @@ public class CadastroLivro extends JFrame {
                             "Preencha todos os campos!");
                 } else {
                     LivrosController controller = new LivrosController();
-                    try{
-                        controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
-                                Integer.parseInt(qtdPagInput.getText()), pessoa);
-                        dispose();
-                        JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
-                        Menu menu = new Menu(Menu.userlogged());
-                        menu.setVisible(true);
-                    }catch (Exception exception){
-                        JOptionPane.showMessageDialog(null, exception.getMessage());
+                    if (opcao == 2) {
+                        Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
+                        livroAtualizado.setTitulo(tituloInput.getText());
+                        livroAtualizado.setIsbn(Integer.parseInt(isbnInput.getText()));
+                        livroAtualizado.setQtdPag(Integer.parseInt(qtdPagInput.getText()));
+                        LivrosController livrosController = new LivrosController();
+                        livrosController.editarLivro(isbn, 1);
+                    } else {
+                        try {
+                            controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
+                                    Integer.parseInt(qtdPagInput.getText()), pessoa);
+                            dispose();
+                            JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+                            Menu menu = new Menu(Menu.userlogged());
+                            menu.setVisible(true);
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(null, exception.getMessage());
+                        }
                     }
                 }
             }
@@ -53,10 +65,17 @@ public class CadastroLivro extends JFrame {
         });
     }
 
-    private void criarComponentes() {
-        setContentPane(cadastroLivro);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
+    private void criarComponentes(int opcao, String isbn) {
+        if (opcao == 2) {
+            Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
+            tituloInput.setText(livroAtualizado.getTitulo());
+            isbnInput.setText(livroAtualizado.getTitulo());
+            qtdPagInput.setText(Integer.toString(livroAtualizado.getQtdPag()));
+        } else {
+            setContentPane(cadastroLivro);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            pack();
+        }
     }
 
 }

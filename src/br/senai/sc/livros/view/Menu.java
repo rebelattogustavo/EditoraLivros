@@ -58,13 +58,12 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("cadastrarLivro")) {
             dispose();
-            CadastroLivro cadastro = new CadastroLivro(usuario);
+            CadastroLivro cadastro = new CadastroLivro(usuario, 1, null);
             cadastro.setVisible(true);
         } else if (e.getActionCommand().equals("cadastrarRevisor")) {
             dispose();
             CadastroPessoa cadastro = new CadastroPessoa();
             cadastro.setVisible(true);
-
         } else if (e.getActionCommand().equals("listarLivros")) {
             dispose();
             Estante estante = new Estante(1);
