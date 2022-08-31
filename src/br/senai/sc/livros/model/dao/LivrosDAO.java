@@ -17,6 +17,11 @@ public class LivrosDAO {
         Livros livro2 = new Livros("Stranger Things", 2, 200, autor2, Status.AGUARDANDO_EDICAO);
         Livros livro3 = new Livros("Harry Poter", 3, 200, autor2, Status.EM_REVISAO);
         Livros livro4 = new Livros("Ghostbuster", 4, 200, autor2, Status.APROVADO);
+        Editoras editora = new Editoras("");
+        livro4.setEditora(editora);
+        livro3.setEditora(editora);
+        livro2.setEditora(editora);
+        livro.setEditora(editora);
 
         listaLivros.add(livro);
         listaLivros.add(livro2);
@@ -27,6 +32,8 @@ public class LivrosDAO {
     }
 
     public void inserir(Livros livro){
+        Editoras editora = new Editoras("");
+        livro.setEditora(editora);
         listaLivros.add(livro);
     }
 

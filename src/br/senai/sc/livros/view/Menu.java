@@ -19,7 +19,7 @@ public class Menu extends JFrame implements ActionListener {
     private JButton editarLivrosButton;
     private static Pessoas usuario;
 
-    public static Pessoas userlogged(){
+    public static Pessoas userlogged() {
         return usuario;
     }
 
@@ -46,10 +46,10 @@ public class Menu extends JFrame implements ActionListener {
         cadastrarRevisorButton.setActionCommand("cadastrarRevisor");
         sairButton.addActionListener(this);
         sairButton.setActionCommand("sair");
-        if(usuario instanceof Autores || usuario instanceof Revisores){
+        if (usuario instanceof Autores || usuario instanceof Revisores) {
             cadastrarRevisorButton.setVisible(false);
         }
-        if(usuario instanceof Diretores || usuario instanceof Revisores){
+        if (usuario instanceof Diretores || usuario instanceof Revisores) {
             cadastrarLivroButton.setVisible(false);
         }
     }

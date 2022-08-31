@@ -33,12 +33,21 @@ public class CadastroLivro extends JFrame {
                 } else {
                     LivrosController controller = new LivrosController();
                     if (opcao == 2) {
-                        Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
-                        livroAtualizado.setTitulo(tituloInput.getText());
-                        livroAtualizado.setIsbn(Integer.parseInt(isbnInput.getText()));
-                        livroAtualizado.setQtdPag(Integer.parseInt(qtdPagInput.getText()));
-                        LivrosController livrosController = new LivrosController();
-                        livrosController.editarLivro(isbn, 1);
+                        try{
+                            Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
+                            livroAtualizado.setTitulo(tituloInput.getText());
+                            livroAtualizado.setIsbn(Integer.parseInt(isbnInput.getText()));
+                            livroAtualizado.setQtdPag(Integer.parseInt(qtdPagInput.getText()));
+                            LivrosController livrosController = new LivrosController();
+                            livrosController.editarLivro(isbn, 1);
+                            dispose();
+                            JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso!");
+                            Menu menu = new Menu(Menu.userlogged());
+                            menu.setVisible(true);
+                        }catch (Exception exception){
+                            JOptionPane.showMessageDialog(null, exception.getMessage());
+                        }
+
                     } else {
                         try {
                             controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
@@ -69,13 +78,12 @@ public class CadastroLivro extends JFrame {
         if (opcao == 2) {
             Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
             tituloInput.setText(livroAtualizado.getTitulo());
-            isbnInput.setText(livroAtualizado.getTitulo());
+            isbnInput.setText(Integer.toString(livroAtualizado.getIsbn()));
             qtdPagInput.setText(Integer.toString(livroAtualizado.getQtdPag()));
-        } else {
-            setContentPane(cadastroLivro);
-            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            pack();
         }
+        setContentPane(cadastroLivro);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        pack();
     }
 
 }

@@ -25,12 +25,13 @@ public class Estante extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
                 String isbn = tabelaLivros.getValueAt(tabelaLivros.getSelectedRow(), 0).toString();
-                if(Menu.userlogged() instanceof Revisores || Menu.userlogged() instanceof Diretores){
+                if (Menu.userlogged() instanceof Revisores || Menu.userlogged() instanceof Diretores) {
                     ModalStatus modalStatus = new ModalStatus(isbn);
                     modalStatus.setVisible(true);
-                }else {
+                } else {
                     dispose();
-                    CadastroLivro cadastroLivro = new CadastroLivro(Menu.userlogged(), 2, )
+                    CadastroLivro cadastroLivro = new CadastroLivro(Menu.userlogged(), 2, isbn);
+                    cadastroLivro.setVisible(true);
                 }
             }
         });
@@ -48,14 +49,13 @@ public class Estante extends JFrame {
     }
 
 
-
     private void criarComponentes() {
         LivrosController controller = new LivrosController();
         tabelaLivros.setModel(new DefaultTableModelArrayList(controller.buscarLista(lista)));
         if (lista == 1) {
             editarButton.setVisible(false);
             revisarLivroButton.setVisible(false);
-            if(Menu.userlogged() instanceof Revisores){
+            if (Menu.userlogged() instanceof Revisores) {
                 revisarLivroButton.setVisible(true);
             }
         } else {

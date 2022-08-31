@@ -34,7 +34,7 @@ public class DefaultTableModelArrayList extends AbstractTableModel {
             case 1 -> livro.getTitulo();
             case 2 -> livro.getQtdPag();
             case 3 -> livro.getAutor().getNome() + " " + livro.getAutor().getSobrenome();
-            case 4 -> livro.getEditora();
+            case 4 -> livro.getEditora().getNome();
             default -> livro.getStatus();
         };
     }

@@ -119,9 +119,10 @@ public class LivrosController {
             }else if(opcao == 4){
                 livroAtualizado.setStatus(Status.REPROVADO);
             }else if(opcao == 5){
+                Editoras editora = new Editoras("Gusta's");
                 livroAtualizado.setStatus(Status.PUBLICADO);
+                livroAtualizado.setEditora(editora);
             }
-            livroAtualizado.setStatus(Status.APROVADO);
         }
         service.atualizar(Integer.parseInt(isbn), livroAtualizado);
     }
