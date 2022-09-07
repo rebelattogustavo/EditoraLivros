@@ -2,6 +2,8 @@ package br.senai.sc.livros.model.entities;
 
 import br.senai.sc.livros.model.service.LivroService;
 
+import java.util.Objects;
+
 public class Livros {
     private Autores autor;
     private Editoras editora;
@@ -22,12 +24,12 @@ public class Livros {
     }
 
 
-    public static Livros cadastrar(String titulo,  int isbn, int qtdPag, Autores autor) throws Exception {
+    public static Livros cadastrar(String titulo, int isbn, int qtdPag, Autores autor) throws Exception {
         LivroService livroService = new LivroService();
-        for(Livros livro : livroService.buscarLista()) {
-            if(livro.getIsbn() == isbn) {
-                throw  new Exception("Isbn já cadastrado");
-            }else {
+        for (Livros livro : livroService.buscarLista()) {
+            if (livro.getIsbn() == isbn) {
+                throw new Exception("Isbn já cadastrado");
+            } else {
                 return new Livros(titulo, isbn, qtdPag, autor, Status.AGUARDANDO_REVISAO);
             }
         }
@@ -36,10 +38,6 @@ public class Livros {
 
     public Autores getAutor() {
         return autor;
-    }
-
-    public void setAutor(Autores autor) {
-        this.autor = autor;
     }
 
     public Editoras getEditora() {
@@ -82,5 +80,18 @@ public class Livros {
         this.qtdPag = qtdPag;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+        Livros livros = (Livros) o;
+        return this.isbn == livros.isbn;
+    }
+
+    @Override
+    public int hashCode(){
+        return isbn;
+    }
 
 }

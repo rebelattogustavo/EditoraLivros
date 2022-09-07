@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ModalStatus extends JFrame{
+public class ModalStatus extends JFrame {
     private JButton aguardandoRevisãoButton;
     private JButton aprovadoButton;
     private JButton aguardandoEdiçãoButton;
@@ -79,10 +79,10 @@ public class ModalStatus extends JFrame{
         aguardandoEdiçãoButton.setVisible(false);
         publicadoButton.setVisible(false);
         reprovadoButton.setVisible(true);
-        if(Menu.userlogged() instanceof Revisores){
+        if (Menu.userlogged() instanceof Revisores) {
             aprovadoButton.setVisible(true);
             aguardandoEdiçãoButton.setVisible(true);
-        }else {
+        } else {
             aguardandoRevisãoButton.setVisible(true);
             publicadoButton.setVisible(true);
         }

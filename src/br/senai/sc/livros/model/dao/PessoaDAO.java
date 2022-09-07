@@ -4,9 +4,11 @@ import br.senai.sc.livros.model.entities.*;
 import br.senai.sc.livros.model.service.PessoaService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PessoaDAO {
-    private static ArrayList<Pessoas> listaPessoas = new ArrayList<>();
+    private static Set<Pessoas> listaPessoas = new HashSet<>();
 
 
     static {
@@ -21,39 +23,42 @@ public class PessoaDAO {
         listaPessoas.add(maria);
     }
 
-    public static void inserir(Pessoas pessoa){
+    public static void inserir(Pessoas pessoa) {
         listaPessoas.add(pessoa);
     }
 
-    public void remover(Pessoas pessoa){
+    public void remover(Pessoas pessoa) {
         listaPessoas.remove(pessoa);
     }
 
 
-
-    public Pessoas selecionarCpf(String cpf){
-        for (Pessoas pessoa : listaPessoas){
-            if(pessoa.getCpf().equals(cpf)){
+    public Pessoas selecionarCpf(String cpf) {
+        for (Pessoas pessoa : listaPessoas) {
+            if (pessoa.getCpf().equals(cpf)) {
                 return pessoa;
             }
         }
         throw new RuntimeException("Pessoa não encontrada");
     }
-    public Pessoas selecionarEmail(String email){
-        for (Pessoas pessoa : listaPessoas){
-            if(pessoa.getEmail().equals(email)){
+
+    public Pessoas selecionarEmail(String email) {
+        for (Pessoas pessoa : listaPessoas) {
+            if (pessoa.getEmail().equals(email)) {
                 return pessoa;
             }
         }
         throw new RuntimeException("Email não encontrado");
     }
 
-    public void atualizar(String cpf, Pessoas pessoaAtt){
-        for(int i =0; i< listaPessoas.size(); i++){
-            if(listaPessoas.get(i).getCpf().equals(cpf)){
-                listaPessoas.set(i, pessoaAtt);
+    public void atualizar(String cpf, Pessoas pessoaAtt) {
+        for (Pessoas pessoa : listaPessoas) {
+            if (pessoa.getCpf().equals(cpf)) {
+                listaPessoas.remove(pessoa);
+                listaPessoas.add(pessoa);
             }
         }
     }
-    
+
+
+
 }

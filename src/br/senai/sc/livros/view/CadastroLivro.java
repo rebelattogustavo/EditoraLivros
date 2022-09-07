@@ -33,7 +33,7 @@ public class CadastroLivro extends JFrame {
                 } else {
                     LivrosController controller = new LivrosController();
                     if (opcao == 2) {
-                        try{
+                        try {
                             Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
                             livroAtualizado.setTitulo(tituloInput.getText());
                             livroAtualizado.setIsbn(Integer.parseInt(isbnInput.getText()));
@@ -44,7 +44,7 @@ public class CadastroLivro extends JFrame {
                             JOptionPane.showMessageDialog(null, "Livro atualizado com sucesso!");
                             Menu menu = new Menu(Menu.userlogged());
                             menu.setVisible(true);
-                        }catch (Exception exception){
+                        } catch (Exception exception) {
                             JOptionPane.showMessageDialog(null, exception.getMessage());
                         }
 

@@ -9,7 +9,8 @@ public enum Status {
     PUBLICADO("Publicado");
 
     String nome;
-    Status(String nome){
+
+    Status(String nome) {
         this.nome = nome;
     }
 }

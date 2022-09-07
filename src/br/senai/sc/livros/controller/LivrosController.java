@@ -7,59 +7,9 @@ import br.senai.sc.livros.view.Menu;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class LivrosController {
-
-    Livros livro = new Livros();
-
-    public Autores getAutor() {
-        return livro.getAutor();
-    }
-
-    public void setAutor(Autores autor) {
-        livro.setAutor(autor);
-    }
-
-    public Editoras getEditora() {
-        return livro.getEditora();
-    }
-
-    public void setEditora(Editoras editora) {
-        livro.setEditora(editora);
-    }
-
-    public String getTitulo() {
-        return livro.getTitulo();
-    }
-
-    public void setTitulo(String titulo) {
-        livro.setTitulo(titulo);
-    }
-
-    public Status getStatus() {
-        return livro.getStatus();
-    }
-
-    public void setStatus(Status status) {
-        livro.setStatus(status);
-    }
-
-    public int getIsbn() {
-        return livro.getIsbn();
-    }
-
-    public void setIsbn(int isbn) {
-        livro.setIsbn(isbn);
-    }
-
-    public int getQtdPag() {
-        return livro.getQtdPag();
-    }
-
-    public void setQtdPag(int qtdPag) {
-        livro.setQtdPag(qtdPag);
-    }
-
     public void cadastrar(String titulo, int isbn, int qtdPag, Pessoas pessoa) throws Exception {
         Livros livro;
         livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
@@ -74,7 +24,7 @@ public class LivrosController {
     }
 
 
-    public ArrayList<Livros> buscarLista(int lista) {
+    public Collection<Livros> buscarLista(int lista) {
         LivroService service = new LivroService();
         Pessoas usuario = Menu.userlogged();
         if (usuario instanceof Autores) {
@@ -106,19 +56,19 @@ public class LivrosController {
         } else if (Menu.userlogged() instanceof Revisores) {
             if (opcao == 2) {
                 livroAtualizado.setStatus(Status.AGUARDANDO_EDICAO);
-            }else if(opcao == 3){
+            } else if (opcao == 3) {
                 livroAtualizado.setStatus(Status.APROVADO);
-            }else if(opcao == 4){
+            } else if (opcao == 4) {
                 livroAtualizado.setStatus(Status.REPROVADO);
-            }else {
+            } else {
                 livroAtualizado.setStatus(Status.EM_REVISAO);
             }
         } else {
             if (opcao == 1) {
                 livroAtualizado.setStatus(Status.AGUARDANDO_REVISAO);
-            }else if(opcao == 4){
+            } else if (opcao == 4) {
                 livroAtualizado.setStatus(Status.REPROVADO);
-            }else if(opcao == 5){
+            } else if (opcao == 5) {
                 Editoras editora = new Editoras("Gusta's");
                 livroAtualizado.setStatus(Status.PUBLICADO);
                 livroAtualizado.setEditora(editora);
@@ -126,11 +76,5 @@ public class LivrosController {
         }
         service.atualizar(Integer.parseInt(isbn), livroAtualizado);
     }
-
-
-//    public ArrayList<Livros> selecionarPorAutor(Autores autor){
-//        LivroService service = new LivroService();
-//        return service.selecionarPorAutor(autor);
-//    }
 
 }

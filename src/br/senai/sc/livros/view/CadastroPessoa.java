@@ -47,10 +47,10 @@ public class CadastroPessoa extends JFrame {
                                 confirmaSenhaInput.getText());
                         dispose();
                         JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                        if(Menu.userlogged() == null){
+                        if (Menu.userlogged() == null) {
                             Login login = new Login();
                             login.setVisible(true);
-                        }else{
+                        } else {
                             Menu menu = new Menu(Menu.userlogged());
                             menu.setVisible(true);
                         }

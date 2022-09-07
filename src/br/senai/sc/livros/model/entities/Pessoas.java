@@ -3,9 +3,11 @@ package br.senai.sc.livros.model.entities;
 import br.senai.sc.livros.model.service.PessoaService;
 import br.senai.sc.livros.view.Menu;
 
+import java.util.Objects;
+
 public class Pessoas {
-    String nome, sobrenome, email, senha, cpf;
-    Genero genero;
+    private String nome, sobrenome, email, senha, cpf;
+    private Genero genero;
 
     public Pessoas(String nome, String sobrenome, String email, String senha, String cpf, Genero genero) {
         this.nome = nome;
@@ -28,32 +30,16 @@ public class Pessoas {
         return sobrenome;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getGenero() {
@@ -76,9 +62,9 @@ public class Pessoas {
                                     String senha, String cpf, Genero genero, String confSenha) {
         if (senha.equals(confSenha)) {
             if (email.contains("@")) {
-                if(Menu.userlogged() instanceof Diretores){
+                if (Menu.userlogged() instanceof Diretores) {
                     return new Revisores(nome, sobrenome, email, senha, cpf, genero);
-                }else {
+                } else {
                     return new Autores(nome, sobrenome, email, senha, cpf, genero);
                 }
             }
@@ -87,4 +73,14 @@ public class Pessoas {
         throw new RuntimeException("Senhas não conferem");
     }
 
+    @Override
+    public boolean equals(Object o) {
+        Pessoas outraPessoa = (Pessoas) o;
+        return cpf.equals(outraPessoa.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return cpf.charAt(0);
+    }
 }

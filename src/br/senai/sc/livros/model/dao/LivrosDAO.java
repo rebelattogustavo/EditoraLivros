@@ -3,10 +3,10 @@ package br.senai.sc.livros.model.dao;
 import br.senai.sc.livros.model.entities.*;
 import kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypesOrBuilder;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class LivrosDAO {
-    private static ArrayList<Livros> listaLivros = new ArrayList<>();
+    private static Set<Livros> listaLivros = new HashSet<>();
 
 
     static {
@@ -31,61 +31,65 @@ public class LivrosDAO {
 
     }
 
-    public void inserir(Livros livro){
+    public void inserir(Livros livro) {
         Editoras editora = new Editoras("");
         livro.setEditora(editora);
         listaLivros.add(livro);
     }
 
-    public void remover(Livros livro){
+    public void remover(Livros livro) {
         listaLivros.remove(livro);
     }
 
-    public Livros selecionar(int isbn){
-        for (Livros livro : listaLivros){
-            if(livro.getIsbn() == isbn){
+    public Livros selecionar(int isbn) {
+        for (Livros livro : listaLivros) {
+            if (livro.getIsbn() == isbn) {
                 return livro;
             }
         }
         throw new RuntimeException();
     }
 
-    public void atualizar(int isbn, Livros livroAtt){
-        for(int i =0; i< listaLivros.size(); i++){
-            if(listaLivros.get(i).getIsbn() == isbn){
-                listaLivros.set(i, livroAtt);
+    public void atualizar(int isbn, Livros livroAtt) {
+        for (Livros livro : listaLivros) {
+            if (livro.getIsbn() == isbn) {
+                listaLivros.remove(livro);
+                listaLivros.add(livroAtt);
             }
         }
     }
 
-    public ArrayList<Livros> buscarLista(){
-        return listaLivros;
+    public Collection<Livros> buscarLista() {
+        return Collections.unmodifiableCollection(listaLivros);
     }
 
-    public ArrayList<Livros> selecionarPorAutor(Pessoas autor){
+
+
+    public Collection<Livros> selecionarPorAutor(Pessoas autor) {
         System.out.println(autor.getNome());
         ArrayList<Livros> livrosAutor = new ArrayList<>();
-        for(Livros livro : listaLivros) {
+        for (Livros livro : listaLivros) {
             if (livro.getAutor().equals(autor)) {
                 livrosAutor.add(livro);
             }
         }
         return livrosAutor;
     }
-    public ArrayList<Livros> selecionarPorStatus(Status status){
-        ArrayList<Livros> livrosAutor = new ArrayList<>();
-        for(Livros livro : listaLivros){
-            if(livro.getStatus().equals(status)){
+
+    public Collection<Livros> selecionarPorStatus(Status status) {
+        Collection<Livros> livrosAutor = new ArrayList<>();
+        for (Livros livro : listaLivros) {
+            if (livro.getStatus().equals(status)) {
                 livrosAutor.add(livro);
             }
         }
         return livrosAutor;
     }
 
-    public ArrayList<Livros> selecionarAtividadesAutor(Pessoas autor){
-        ArrayList<Livros> livrosAutor = new ArrayList<>();
-        for(Livros livro : listaLivros){
-            if(livro.getAutor().equals(autor) && livro.getStatus().equals(Status.AGUARDANDO_EDICAO)){
+    public Collection<Livros> selecionarAtividadesAutor(Pessoas autor) {
+        Collection<Livros> livrosAutor = new ArrayList<>();
+        for (Livros livro : listaLivros) {
+            if (livro.getAutor().equals(autor) && livro.getStatus().equals(Status.AGUARDANDO_EDICAO)) {
                 livrosAutor.add(livro);
             }
         }

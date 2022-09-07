@@ -16,7 +16,7 @@ public class PessoaController {
     }
 
     public void cadastrar(String nome, String sobrenome, String email, String senha,
-                          String cpf, Object genero, String confSenha){
+                          String cpf, Object genero, String confSenha) {
 
         Pessoas pessoa = Pessoas.cadastrar(nome, sobrenome, email, senha, cpf, (Genero) genero, confSenha);
         PessoaService service = new PessoaService();
