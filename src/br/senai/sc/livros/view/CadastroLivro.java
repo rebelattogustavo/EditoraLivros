@@ -50,10 +50,14 @@ public class CadastroLivro extends JFrame {
 
                     } else {
                         try {
-                            controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
+                            boolean verifica = controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
                                     Integer.parseInt(qtdPagInput.getText()), pessoa);
                             dispose();
-                            JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+                            if (verifica) {
+                                JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "ISBN já cadastrado!");
+                            }
                             Menu menu = new Menu(Menu.userlogged());
                             menu.setVisible(true);
                         } catch (Exception exception) {

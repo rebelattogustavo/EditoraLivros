@@ -31,10 +31,15 @@ public class LivrosDAO {
 
     }
 
-    public void inserir(Livros livro) {
+    public boolean inserir(Livros livro) {
+        if (listaLivros.contains(livro)) {
+            return false;
+        }
         Editoras editora = new Editoras("");
         livro.setEditora(editora);
         listaLivros.add(livro);
+        return true;
+
     }
 
     public void remover(Livros livro) {
@@ -62,7 +67,6 @@ public class LivrosDAO {
     public Collection<Livros> buscarLista() {
         return Collections.unmodifiableCollection(listaLivros);
     }
-
 
 
     public Collection<Livros> selecionarPorAutor(Pessoas autor) {

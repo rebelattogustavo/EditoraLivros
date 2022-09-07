@@ -11,8 +11,8 @@ import java.util.Collection;
 public class LivroService {
     LivrosDAO acesso = new LivrosDAO();
 
-    public void inserir(Livros livro) {
-        acesso.inserir(livro);
+    public boolean inserir(Livros livro) {
+        return acesso.inserir(livro);
     }
 
     public Livros selecionar(int isbn) {

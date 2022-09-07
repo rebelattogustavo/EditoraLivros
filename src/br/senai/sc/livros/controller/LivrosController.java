@@ -10,17 +10,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class LivrosController {
-    public void cadastrar(String titulo, int isbn, int qtdPag, Pessoas pessoa) throws Exception {
+    public boolean cadastrar(String titulo, int isbn, int qtdPag, Pessoas pessoa) throws Exception {
         Livros livro;
         livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
         if (livro != null) {
             LivroService service = new LivroService();
-            service.inserir(livro);
+            return service.inserir(livro);
         } else {
             CadastroLivro cadastroLivro = new CadastroLivro(pessoa, 1, null);
             cadastroLivro.setVisible(false);
             JOptionPane.showMessageDialog(null, "ISBN já existe!");
         }
+        return true;
     }
 
 
