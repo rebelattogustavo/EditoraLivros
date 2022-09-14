@@ -7,6 +7,7 @@ import br.senai.sc.livros.model.service.LivroService;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Estante extends JFrame {
 
@@ -17,7 +18,7 @@ public class Estante extends JFrame {
     private JButton revisarLivroButton;
     private static int lista;
 
-    public Estante(int botao) {
+    public Estante(int botao) throws SQLException {
         lista = botao;
         criarComponentes();
         editarButton.addActionListener(new ActionListener() {
@@ -30,7 +31,12 @@ public class Estante extends JFrame {
                     modalStatus.setVisible(true);
                 } else {
                     dispose();
-                    CadastroLivro cadastroLivro = new CadastroLivro(Menu.userlogged(), 2, isbn);
+                    CadastroLivro cadastroLivro = null;
+                    try {
+                        cadastroLivro = new CadastroLivro(Menu.userlogged(), 2, isbn);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                     cadastroLivro.setVisible(true);
                 }
             }
@@ -40,15 +46,24 @@ public class Estante extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
                 String isbn = tabelaLivros.getValueAt(tabelaLivros.getSelectedRow(), 0).toString();
-                controller.editarLivro(isbn, 5);
+                try {
+                    controller.editarLivro(isbn, 5);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 dispose();
-                Estante estante = new Estante(lista);
+                Estante estante = null;
+                try {
+                    estante = new Estante(lista);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });
     }
 
-    private void criarComponentes() {
+    private void criarComponentes() throws SQLException {
         LivrosController controller = new LivrosController();
         tabelaLivros.setModel(new DefaultTableModelCollection(controller.buscarLista(lista)));
         if (lista == 1) {

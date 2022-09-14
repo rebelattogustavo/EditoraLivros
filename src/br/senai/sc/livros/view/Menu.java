@@ -8,6 +8,7 @@ import br.senai.sc.livros.model.entities.Revisores;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Menu extends JFrame implements ActionListener {
     private JButton sairButton;
@@ -56,31 +57,39 @@ public class Menu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("cadastrarLivro")) {
-            dispose();
-            CadastroLivro cadastro = new CadastroLivro(usuario, 1, null);
-            cadastro.setVisible(true);
-        } else if (e.getActionCommand().equals("cadastrarRevisor")) {
-            dispose();
-            CadastroPessoa cadastro = new CadastroPessoa();
-            cadastro.setVisible(true);
-        } else if (e.getActionCommand().equals("listarLivros")) {
-            dispose();
-            Estante estante = new Estante(1);
-            estante.setVisible(true);
-        } else if (e.getActionCommand().equals("listarAtividades")) {
-            dispose();
-            Estante estante = new Estante(2);
-            estante.setVisible(true);
-        } else if (e.getActionCommand().equals("editarLivros")) {
-            dispose();
-            Estante estante = new Estante(2);
-            estante.setVisible(true);
-        } else if (e.getActionCommand().equals("sair")) {
-            usuario = null;
-            dispose();
-            Login login = new Login();
-            login.setVisible(true);
+        try {
+            if (e.getActionCommand().equals("cadastrarLivro")) {
+                dispose();
+                CadastroLivro cadastro = null;
+                cadastro = new CadastroLivro(usuario, 1, null);
+                cadastro.setVisible(true);
+            } else if (e.getActionCommand().equals("cadastrarRevisor")) {
+                dispose();
+                CadastroPessoa cadastro = new CadastroPessoa();
+                cadastro.setVisible(true);
+            } else if (e.getActionCommand().equals("listarLivros")) {
+                dispose();
+                Estante estante = null;
+                estante = new Estante(1);
+                estante.setVisible(true);
+            } else if (e.getActionCommand().equals("listarAtividades")) {
+                dispose();
+                Estante estante = null;
+                estante = new Estante(2);
+                estante.setVisible(true);
+            } else if (e.getActionCommand().equals("editarLivros")) {
+                dispose();
+                Estante estante = null;
+                estante = new Estante(2);
+                estante.setVisible(true);
+            } else if (e.getActionCommand().equals("sair")) {
+                usuario = null;
+                dispose();
+                Login login = new Login();
+                login.setVisible(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
     }

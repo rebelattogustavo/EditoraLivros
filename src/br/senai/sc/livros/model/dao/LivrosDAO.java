@@ -3,6 +3,10 @@ package br.senai.sc.livros.model.dao;
 import br.senai.sc.livros.model.entities.*;
 import kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypesOrBuilder;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class LivrosDAO {
@@ -31,12 +35,31 @@ public class LivrosDAO {
 
     }
 
-    public boolean inserir(Livros livro) {
+    public boolean inserir(Livros livro) throws SQLException {
         if (listaLivros.contains(livro)) {
             return false;
         }
         Editoras editora = new Editoras("");
-        livro.setEditora(editora);
+        String sql = "INSERT INTO livros(isbn, titulo, qtdPagina, status, editora, pessoa_cpf)" +
+                " values (?,?,?,?,?,?)";
+
+        System.out.println(livro.getStatus().toString());
+
+        Conexao conexao = new Conexao();
+        conexao.connectionBD();
+        Connection connection = conexao.connectionBD();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, livro.getIsbn());
+        statement.setString(2, livro.getTitulo());
+        statement.setInt(3, livro.getQtdPag());
+        statement.setString(4, livro.getStatus().toString());
+        statement.setString(5, "");
+        statement.setString(6, livro.getAutor().getCpf());
+
+        statement.execute();
+        System.out.println("Processo finalizado com sucesso!");
+        connection.close();
         listaLivros.add(livro);
         return true;
 
@@ -46,13 +69,40 @@ public class LivrosDAO {
         listaLivros.remove(livro);
     }
 
-    public Livros selecionar(int isbn) {
-        for (Livros livro : listaLivros) {
-            if (livro.getIsbn() == isbn) {
+    public Livros selecionar(int isbn) throws SQLException {
+        String sql = "SELECT * from contatos WHERE isbn = ?";
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.connectionBD();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, isbn);
+        ResultSet resultado = statement.executeQuery();
+        Livros livro;
+        if (resultado != null) {
+            if (resultado.next()) {
+                livro = new Livros(
+                        resultado.getInt("isbn"),
+                        resultado.getString("titulo"),
+                        resultado.getInt("qtdPagina"),
+                        resultado.getString("status"),
+                        resultado.getString("editora"),
+                        resultado.getString("pessoa_cpf")
+                );
+                System.out.println(livro);
                 return livro;
             }
+//            contactsCollection.add(contact);
+        }else {
+            throw new RuntimeException("Deu ruim!");
         }
-        throw new RuntimeException();
+        connection.close();
+        System.out.println("Processo finalizado com sucesso!");
+        return null;
+//        for (Livros livro : listaLivros) {
+//            if (livro.getIsbn() == isbn) {
+//                return livro;
+//            }
+//        }
+//        throw new RuntimeException();
     }
 
     public void atualizar(int isbn, Livros livroAtt) {
@@ -69,35 +119,113 @@ public class LivrosDAO {
     }
 
 
-    public Collection<Livros> selecionarPorAutor(Pessoas autor) {
-        System.out.println(autor.getNome());
+    public Collection<Livros> selecionarPorAutor(Pessoas autor) throws SQLException {
         ArrayList<Livros> livrosAutor = new ArrayList<>();
-        for (Livros livro : listaLivros) {
-            if (livro.getAutor().equals(autor)) {
+        String sql = "SELECT * from livros WHERE pessoa_cpf = ?";
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.connectionBD();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, autor.getCpf());
+        ResultSet resultado = statement.executeQuery();
+        int verifica;
+        Livros livro;
+        while (resultado != null) {
+            if (resultado.next()) {
+                livro = new Livros(
+                        resultado.getInt("isbn"),
+                        resultado.getString("titulo"),
+                        resultado.getInt("qtdPagina"),
+                        resultado.getString("status"),
+                        resultado.getString("editora"),
+                        resultado.getString("pessoa_cpf")
+                );
+                verifica = 0;
                 livrosAutor.add(livro);
+            }else {
+                verifica = 1;
             }
         }
+        connection.close();
+        System.out.println("Processo finalizado com sucesso!");
         return livrosAutor;
+//        System.out.println(autor.getNome());
+
+//        for (Livros livro : listaLivros) {
+//            if (livro.getAutor().equals(autor)) {
+//                livrosAutor.add(livro);
+//            }
+//        }
+//        return livrosAutor;
     }
 
-    public Collection<Livros> selecionarPorStatus(Status status) {
+    public Collection<Livros> selecionarPorStatus(Status status) throws SQLException {
         Collection<Livros> livrosAutor = new ArrayList<>();
-        for (Livros livro : listaLivros) {
-            if (livro.getStatus().equals(status)) {
+        String sql = "SELECT * from livros WHERE status = ?";
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.connectionBD();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, status.toString());
+        ResultSet resultado = statement.executeQuery();
+        Livros livro;
+        while (resultado != null) {
+            if (resultado.next()) {
+                livro = new Livros(
+                        resultado.getInt("isbn"),
+                        resultado.getString("titulo"),
+                        resultado.getInt("qtdPagina"),
+                        resultado.getString("status"),
+                        resultado.getString("editora"),
+                        resultado.getString("pessoa_cpf")
+                );
                 livrosAutor.add(livro);
+            }else {
+                throw new RuntimeException("Deu ruim!");
             }
         }
+        connection.close();
+        System.out.println("Processo finalizado com sucesso!");
         return livrosAutor;
+//        for (Livros livro : listaLivros) {
+//            if (livro.getStatus().equals(status)) {
+//                livrosAutor.add(livro);
+//            }
+//        }
+//        return livrosAutor;
     }
 
-    public Collection<Livros> selecionarAtividadesAutor(Pessoas autor) {
+    public Collection<Livros> selecionarAtividadesAutor(Pessoas autor) throws SQLException {
         Collection<Livros> livrosAutor = new ArrayList<>();
-        for (Livros livro : listaLivros) {
-            if (livro.getAutor().equals(autor) && livro.getStatus().equals(Status.AGUARDANDO_EDICAO)) {
+        String sql = "SELECT * FROM livros where pessoa_cpf = ? and status = 'Aguardando edição";
+        Conexao conexao = new Conexao();
+        Connection connection = conexao.connectionBD();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, autor.getCpf());
+        ResultSet resultado = statement.executeQuery();
+        Livros livro;
+        while (resultado != null){
+            if (resultado.next()){
+                livro = new Livros(
+                        resultado.getInt("isbn"),
+                        resultado.getString("titulo"),
+                        resultado.getInt("qtdPagina"),
+                        resultado.getString("status"),
+                        resultado.getString("editora"),
+                        resultado.getString("pessoa_cpf")
+                );
                 livrosAutor.add(livro);
+            }else {
+                throw new RuntimeException("Deu ruim!");
             }
         }
+        connection.close();
+        System.out.println("Processo finalizado com sucesso!");
         return livrosAutor;
+//        for (Livros livro : listaLivros) {
+//            if (livro.getAutor().equals(autor) && livro.getStatus().equals(Status.AGUARDANDO_EDICAO)) {
+//                livrosAutor.add(livro);
+//            }
+//        }
+//        return livrosAutor;
     }
 
 }

@@ -10,6 +10,7 @@ import br.senai.sc.livros.model.service.LivroService;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class CadastroLivro extends JFrame {
     private JButton VOLTARButton;
@@ -21,7 +22,7 @@ public class CadastroLivro extends JFrame {
     private LivroService service = new LivroService();
 
 
-    public CadastroLivro(Pessoas pessoa, int opcao, String isbn) {
+    public CadastroLivro(Pessoas pessoa, int opcao, String isbn) throws SQLException {
         criarComponentes(opcao, isbn);
         CADASTRARButton.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +79,7 @@ public class CadastroLivro extends JFrame {
         });
     }
 
-    private void criarComponentes(int opcao, String isbn) {
+    private void criarComponentes(int opcao, String isbn) throws SQLException {
         if (opcao == 2) {
             Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
             tituloInput.setText(livroAtualizado.getTitulo());

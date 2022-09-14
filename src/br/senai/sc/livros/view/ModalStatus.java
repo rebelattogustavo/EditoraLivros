@@ -7,6 +7,7 @@ import br.senai.sc.livros.model.entities.Revisores;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class ModalStatus extends JFrame {
     private JButton aguardandoRevisãoButton;
@@ -23,11 +24,20 @@ public class ModalStatus extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Estante estante = new Estante(2);
+                Estante estante = null;
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(false);
                 dispose();
                 LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 1);
+                try {
+                    controller.editarLivro(isbn, 1);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });
@@ -35,9 +45,18 @@ public class ModalStatus extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 2);
+                try {
+                    controller.editarLivro(isbn, 2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 dispose();
-                Estante estante = new Estante(2);
+                Estante estante = null;
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });
@@ -45,9 +64,18 @@ public class ModalStatus extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 3);
+                try {
+                    controller.editarLivro(isbn, 3);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 dispose();
-                Estante estante = new Estante(2);
+                Estante estante = null;
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });
@@ -55,9 +83,18 @@ public class ModalStatus extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 4);
+                try {
+                    controller.editarLivro(isbn, 4);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 dispose();
-                Estante estante = new Estante(2);
+                Estante estante = null;
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });
@@ -65,9 +102,18 @@ public class ModalStatus extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LivrosController controller = new LivrosController();
-                controller.editarLivro(isbn, 5);
+                try {
+                    controller.editarLivro(isbn, 5);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 dispose();
-                Estante estante = new Estante(2);
+                Estante estante = null;
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             }
         });

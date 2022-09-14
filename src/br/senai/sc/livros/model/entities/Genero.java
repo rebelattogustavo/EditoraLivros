@@ -5,6 +5,6 @@ public enum Genero {
     String nome;
 
     Genero(String nome) {
-
+        this.nome = nome;
     }
 }

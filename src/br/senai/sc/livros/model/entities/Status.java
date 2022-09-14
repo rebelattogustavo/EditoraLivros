@@ -8,6 +8,8 @@ public enum Status {
     APROVADO("Aprovado"),
     PUBLICADO("Publicado");
 
+
+
     String nome;
 
     Status(String nome) {

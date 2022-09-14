@@ -23,6 +23,9 @@ public class Livros {
 
     }
 
+    public Livros(int isbn, String titulo, int qtdPagina, String status, String editora, String pessoa_cpf) {
+    }
+
 
     public static Livros cadastrar(String titulo, int isbn, int qtdPag, Autores autor) throws Exception {
         LivroService livroService = new LivroService();

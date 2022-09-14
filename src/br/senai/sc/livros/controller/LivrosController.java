@@ -6,6 +6,7 @@ import br.senai.sc.livros.view.CadastroLivro;
 import br.senai.sc.livros.view.Menu;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,7 +26,7 @@ public class LivrosController {
     }
 
 
-    public Collection<Livros> buscarLista(int lista) {
+    public Collection<Livros> buscarLista(int lista) throws SQLException {
         LivroService service = new LivroService();
         Pessoas usuario = Menu.userlogged();
         if (usuario instanceof Autores) {
@@ -49,7 +50,7 @@ public class LivrosController {
         }
     }
 
-    public void editarLivro(String isbn, int opcao) {
+    public void editarLivro(String isbn, int opcao) throws SQLException {
         LivroService service = new LivroService();
         Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
         if (Menu.userlogged() instanceof Autores) {

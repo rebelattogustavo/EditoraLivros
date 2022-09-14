@@ -4,6 +4,7 @@
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-test.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/MySQL/Connector J 8.0" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -11,5 +12,6 @@
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect-sources.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-test-sources.jar!/" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/MySQL/Connector J 8.0" recursive="false" />
   </library>
 </component>
