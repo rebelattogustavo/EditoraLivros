@@ -2,6 +2,7 @@ package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.model.entities.Livros;
 
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,12 +31,13 @@ public class DefaultTableModelCollection extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Livros livro = dados.get(rowIndex);
+        Livros livro = dados.get(rowIndex );
+        System.out.println(livro.getTitulo());
         return switch (columnIndex) {
             case 0 -> livro.getIsbn();
             case 1 -> livro.getTitulo();
             case 2 -> livro.getQtdPag();
-            case 3 -> livro.getAutor().getNome() + " " + livro.getAutor().getSobrenome();
+            case 3 -> livro.getAutor() + " " + livro.getAutor().getSobrenome();
             case 4 -> livro.getEditora().getNome();
             default -> livro.getStatus();
         };

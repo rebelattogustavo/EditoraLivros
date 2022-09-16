@@ -31,10 +31,6 @@ public class Menu extends JFrame implements ActionListener {
 
 
     private void criarComponentes() {
-        setContentPane(menu);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
-
         cadastrarLivroButton.addActionListener(this);
         cadastrarLivroButton.setActionCommand("cadastrarLivro");
         listarLivrosButton.addActionListener(this);
@@ -53,15 +49,21 @@ public class Menu extends JFrame implements ActionListener {
         if (usuario instanceof Diretores || usuario instanceof Revisores) {
             cadastrarLivroButton.setVisible(false);
         }
+        setContentPane(menu);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        pack();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
             if (e.getActionCommand().equals("cadastrarLivro")) {
                 dispose();
                 CadastroLivro cadastro = null;
-                cadastro = new CadastroLivro(usuario, 1, null);
+                try {
+                    cadastro = new CadastroLivro(usuario, 1, null);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 cadastro.setVisible(true);
             } else if (e.getActionCommand().equals("cadastrarRevisor")) {
                 dispose();
@@ -70,17 +72,29 @@ public class Menu extends JFrame implements ActionListener {
             } else if (e.getActionCommand().equals("listarLivros")) {
                 dispose();
                 Estante estante = null;
-                estante = new Estante(1);
+                try {
+                    estante = new Estante(1);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             } else if (e.getActionCommand().equals("listarAtividades")) {
                 dispose();
                 Estante estante = null;
-                estante = new Estante(2);
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             } else if (e.getActionCommand().equals("editarLivros")) {
                 dispose();
                 Estante estante = null;
-                estante = new Estante(2);
+                try {
+                    estante = new Estante(2);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 estante.setVisible(true);
             } else if (e.getActionCommand().equals("sair")) {
                 usuario = null;
@@ -88,9 +102,7 @@ public class Menu extends JFrame implements ActionListener {
                 Login login = new Login();
                 login.setVisible(true);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
 
     }
 }

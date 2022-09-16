@@ -10,6 +10,9 @@ public class Livros {
     private String titulo;
     private int isbn, qtdPag;
     private Status status;
+    private String statusBD;
+    private String pessoa_cpf;
+    private String editoraBD;
 
     public Livros(String titulo, int isbn, int qtdPag, Autores autor, Status status) {
         this.titulo = titulo;
@@ -24,6 +27,12 @@ public class Livros {
     }
 
     public Livros(int isbn, String titulo, int qtdPagina, String status, String editora, String pessoa_cpf) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.qtdPag = qtdPagina;
+        this.statusBD = status;
+        this.editoraBD = editora;
+        this.pessoa_cpf = pessoa_cpf;
     }
 
 
@@ -83,6 +92,29 @@ public class Livros {
         this.qtdPag = qtdPag;
     }
 
+    public String getStatusBD() {
+        return statusBD;
+    }
+
+    public void setStatusBD(String statusBD) {
+        this.statusBD = statusBD;
+    }
+
+    public String getPessoa_cpf() {
+        return pessoa_cpf;
+    }
+
+    public void setPessoa_cpf(String pessoa_cpf) {
+        this.pessoa_cpf = pessoa_cpf;
+    }
+
+    public String getEditoraBD() {
+        return editoraBD;
+    }
+
+    public void setEditoraBD(String editoraBD) {
+        this.editoraBD = editoraBD;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -97,4 +129,18 @@ public class Livros {
         return isbn;
     }
 
+    @Override
+    public String toString() {
+        return "Livros{" +
+                "autor=" + autor +
+                ", editora=" + editora +
+                ", titulo='" + titulo + '\'' +
+                ", isbn=" + isbn +
+                ", qtdPag=" + qtdPag +
+                ", status=" + status +
+                ", statusBD='" + statusBD + '\'' +
+                ", pessoa_cpf='" + pessoa_cpf + '\'' +
+                ", editoraBD='" + editoraBD + '\'' +
+                '}';
+    }
 }

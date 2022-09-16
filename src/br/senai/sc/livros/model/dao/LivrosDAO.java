@@ -17,7 +17,7 @@ public class LivrosDAO {
         PessoaDAO pessoaDAO = new PessoaDAO();
         Autores autor = new Autores("Stephen", "King", "J@", "123", "123", Genero.MASCULINO);
         Livros livro = new Livros("Robert Downey", 1, 200, autor, Status.AGUARDANDO_REVISAO);
-        Autores autor2 = (Autores) pessoaDAO.selecionarCpf("12");
+        Autores autor2 = (Autores) pessoaDAO.selecionarCpf("10614164966");
         Livros livro2 = new Livros("Stranger Things", 2, 200, autor2, Status.AGUARDANDO_EDICAO);
         Livros livro3 = new Livros("Harry Poter", 3, 200, autor2, Status.EM_REVISAO);
         Livros livro4 = new Livros("Ghostbuster", 4, 200, autor2, Status.APROVADO);
@@ -87,11 +87,10 @@ public class LivrosDAO {
                         resultado.getString("editora"),
                         resultado.getString("pessoa_cpf")
                 );
-                System.out.println(livro);
                 return livro;
             }
 //            contactsCollection.add(contact);
-        }else {
+        } else {
             throw new RuntimeException("Deu ruim!");
         }
         connection.close();
@@ -120,6 +119,7 @@ public class LivrosDAO {
 
 
     public Collection<Livros> selecionarPorAutor(Pessoas autor) throws SQLException {
+        System.out.println(autor.getNome());
         ArrayList<Livros> livrosAutor = new ArrayList<>();
         String sql = "SELECT * from livros WHERE pessoa_cpf = ?";
         Conexao conexao = new Conexao();
@@ -129,32 +129,31 @@ public class LivrosDAO {
         ResultSet resultado = statement.executeQuery();
         int verifica;
         Livros livro;
-        while (resultado != null) {
-            if (resultado.next()) {
-                livro = new Livros(
-                        resultado.getInt("isbn"),
-                        resultado.getString("titulo"),
-                        resultado.getInt("qtdPagina"),
-                        resultado.getString("status"),
-                        resultado.getString("editora"),
-                        resultado.getString("pessoa_cpf")
-                );
-                verifica = 0;
+        while (resultado != null && resultado.next()) {
+            livro = new Livros(
+                    resultado.getInt("isbn"),
+                    resultado.getString("titulo"),
+                    resultado.getInt("qtdPagina"),
+                    resultado.getString("status"),
+                    resultado.getString("editora"),
+                    resultado.getString("pessoa_cpf")
+            );
+            if (livro.getPessoa_cpf().equals(autor.getCpf())) {
                 livrosAutor.add(livro);
-            }else {
-                verifica = 1;
             }
         }
-        connection.close();
         System.out.println("Processo finalizado com sucesso!");
+        System.out.println(livrosAutor);
+        connection.close();
         return livrosAutor;
-//        System.out.println(autor.getNome());
+
 
 //        for (Livros livro : listaLivros) {
 //            if (livro.getAutor().equals(autor)) {
 //                livrosAutor.add(livro);
 //            }
 //        }
+//        System.out.println(livrosAutor);
 //        return livrosAutor;
     }
 
@@ -178,7 +177,7 @@ public class LivrosDAO {
                         resultado.getString("pessoa_cpf")
                 );
                 livrosAutor.add(livro);
-            }else {
+            } else {
                 throw new RuntimeException("Deu ruim!");
             }
         }
@@ -202,8 +201,8 @@ public class LivrosDAO {
         statement.setString(1, autor.getCpf());
         ResultSet resultado = statement.executeQuery();
         Livros livro;
-        while (resultado != null){
-            if (resultado.next()){
+        while (resultado != null) {
+            if (resultado.next()) {
                 livro = new Livros(
                         resultado.getInt("isbn"),
                         resultado.getString("titulo"),
@@ -213,7 +212,7 @@ public class LivrosDAO {
                         resultado.getString("pessoa_cpf")
                 );
                 livrosAutor.add(livro);
-            }else {
+            } else {
                 throw new RuntimeException("Deu ruim!");
             }
         }

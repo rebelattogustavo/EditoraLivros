@@ -25,7 +25,6 @@ public class Login extends JFrame implements Runnable {
                     dispose();
                     Menu menu = new Menu(pessoa);
                     menu.setVisible(true);
-
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage());
                 }

@@ -51,6 +51,7 @@ public class CadastroLivro extends JFrame {
 
                     } else {
                         try {
+
                             boolean verifica = controller.cadastrar(tituloInput.getText(), Integer.parseInt(isbnInput.getText()),
                                     Integer.parseInt(qtdPagInput.getText()), pessoa);
                             dispose();
@@ -80,12 +81,13 @@ public class CadastroLivro extends JFrame {
     }
 
     private void criarComponentes(int opcao, String isbn) throws SQLException {
-        if (opcao == 2) {
+        if (opcao == 2) { ;
             Livros livroAtualizado = service.selecionar(Integer.parseInt(isbn));
             tituloInput.setText(livroAtualizado.getTitulo());
             isbnInput.setText(Integer.toString(livroAtualizado.getIsbn()));
             qtdPagInput.setText(Integer.toString(livroAtualizado.getQtdPag()));
         }
+
         setContentPane(cadastroLivro);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
