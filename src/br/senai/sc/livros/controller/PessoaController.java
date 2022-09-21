@@ -20,8 +20,8 @@ public class PessoaController {
     public void cadastrar(String nome, String sobrenome, String email, String senha,
                           String cpf, Object genero, String confSenha) throws SQLException {
 
-        Pessoas pessoa = Pessoas.cadastrar(nome, sobrenome, email, senha, cpf, (Genero) genero, confSenha);
         PessoaService service = new PessoaService();
+        Pessoas pessoa = Pessoas.cadastrar(nome, sobrenome, email, senha, cpf, (Genero) genero, confSenha);
         service.inserir(pessoa);
     }
 }

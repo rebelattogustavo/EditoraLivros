@@ -31,13 +31,13 @@ public class DefaultTableModelCollection extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Livros livro = dados.get(rowIndex );
-        System.out.println(livro.getTitulo());
+        Livros livro = dados.get(rowIndex);
+        System.out.println(livro.getAutor().getSobrenome());
         return switch (columnIndex) {
             case 0 -> livro.getIsbn();
             case 1 -> livro.getTitulo();
             case 2 -> livro.getQtdPag();
-            case 3 -> livro.getAutor() + " " + livro.getAutor().getSobrenome();
+            case 3 -> livro.getAutor().getNome() + " " + livro.getAutor().getSobrenome();
             case 4 -> livro.getEditora().getNome();
             default -> livro.getStatus();
         };

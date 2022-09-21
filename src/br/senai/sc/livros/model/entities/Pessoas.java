@@ -1,5 +1,6 @@
 package br.senai.sc.livros.model.entities;
 
+import br.senai.sc.livros.Factory.PessoaFactory;
 import br.senai.sc.livros.model.service.PessoaService;
 import br.senai.sc.livros.view.Menu;
 
@@ -48,7 +49,6 @@ public class Pessoas {
 
     public void setGenero(String genero) {
         this.genero = Genero.valueOf(genero);
-
     }
 
     public Pessoas validaLogin(String senha) {
@@ -62,11 +62,11 @@ public class Pessoas {
                                     String senha, String cpf, Genero genero, String confSenha) {
         if (senha.equals(confSenha)) {
             if (email.contains("@")) {
+                int tipo = 1;
                 if (Menu.userlogged() instanceof Diretores) {
-                    return new Revisores(nome, sobrenome, email, senha, cpf, genero);
-                } else {
-                    return new Autores(nome, sobrenome, email, senha, cpf, genero);
+                    tipo = 2;
                 }
+                return new PessoaFactory().getPessoa(nome, sobrenome, email, senha, cpf, genero.nome, tipo);
             }
             throw new RuntimeException("E-mail incorreto");
         }

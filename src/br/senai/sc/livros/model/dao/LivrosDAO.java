@@ -1,7 +1,7 @@
 package br.senai.sc.livros.model.dao;
 
+import br.senai.sc.livros.Factory.ConexaoFactory;
 import br.senai.sc.livros.model.entities.*;
-import kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypesOrBuilder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class LivrosDAO {
         PessoaDAO pessoaDAO = new PessoaDAO();
         Autores autor = new Autores("Stephen", "King", "J@", "123", "123", Genero.MASCULINO);
         Livros livro = new Livros("Robert Downey", 1, 200, autor, Status.AGUARDANDO_REVISAO);
-        Autores autor2 = (Autores) pessoaDAO.selecionarCpf("10614164966");
+        Autores autor2 = (Autores) pessoaDAO.selecionarCpf("12384567892");
         Livros livro2 = new Livros("Stranger Things", 2, 200, autor2, Status.AGUARDANDO_EDICAO);
         Livros livro3 = new Livros("Harry Poter", 3, 200, autor2, Status.EM_REVISAO);
         Livros livro4 = new Livros("Ghostbuster", 4, 200, autor2, Status.APROVADO);
@@ -45,7 +45,7 @@ public class LivrosDAO {
 
         System.out.println(livro.getStatus().toString());
 
-        Conexao conexao = new Conexao();
+        ConexaoFactory conexao = new ConexaoFactory();
         conexao.connectionBD();
         Connection connection = conexao.connectionBD();
 
@@ -71,7 +71,7 @@ public class LivrosDAO {
 
     public Livros selecionar(int isbn) throws SQLException {
         String sql = "SELECT * from contatos WHERE isbn = ?";
-        Conexao conexao = new Conexao();
+        ConexaoFactory conexao = new ConexaoFactory();
         Connection connection = conexao.connectionBD();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, isbn);
@@ -122,7 +122,7 @@ public class LivrosDAO {
         System.out.println(autor.getNome());
         ArrayList<Livros> livrosAutor = new ArrayList<>();
         String sql = "SELECT * from livros WHERE pessoa_cpf = ?";
-        Conexao conexao = new Conexao();
+        ConexaoFactory conexao = new ConexaoFactory();
         Connection connection = conexao.connectionBD();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, autor.getCpf());
@@ -160,7 +160,7 @@ public class LivrosDAO {
     public Collection<Livros> selecionarPorStatus(Status status) throws SQLException {
         Collection<Livros> livrosAutor = new ArrayList<>();
         String sql = "SELECT * from livros WHERE status = ?";
-        Conexao conexao = new Conexao();
+        ConexaoFactory conexao = new ConexaoFactory();
         Connection connection = conexao.connectionBD();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, status.toString());
@@ -194,8 +194,8 @@ public class LivrosDAO {
 
     public Collection<Livros> selecionarAtividadesAutor(Pessoas autor) throws SQLException {
         Collection<Livros> livrosAutor = new ArrayList<>();
-        String sql = "SELECT * FROM livros where pessoa_cpf = ? and status = 'Aguardando edição";
-        Conexao conexao = new Conexao();
+        String sql = "SELECT * FROM livros where pessoa_cpf = ? and status = 'Aguardando edição'";
+        ConexaoFactory conexao = new ConexaoFactory();
         Connection connection = conexao.connectionBD();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, autor.getCpf());
@@ -211,6 +211,7 @@ public class LivrosDAO {
                         resultado.getString("editora"),
                         resultado.getString("pessoa_cpf")
                 );
+
                 livrosAutor.add(livro);
             } else {
                 throw new RuntimeException("Deu ruim!");

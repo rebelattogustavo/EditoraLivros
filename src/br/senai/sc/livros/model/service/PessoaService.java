@@ -6,13 +6,17 @@ import br.senai.sc.livros.model.entities.Pessoas;
 import java.sql.SQLException;
 
 public class PessoaService {
-    PessoaDAO dao = new PessoaDAO();
 
     public void inserir(Pessoas pessoa) throws SQLException {
-        dao.inserir(pessoa);
+        new PessoaDAO().inserir(pessoa);
     }
 
     public Pessoas selecionarEmail(String email) {
-        return dao.selecionarEmail(email);
+        return new PessoaDAO().selecionarEmail(email);
     }
+
+    public Pessoas selecionarCpf(String cpf) {
+        return new PessoaDAO().selecionarCpf(cpf);
+    }
+
 }
