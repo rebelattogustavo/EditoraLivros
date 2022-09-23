@@ -1,7 +1,6 @@
 package br.senai.sc.livros.model.entities;
 
 import br.senai.sc.livros.Factory.PessoaFactory;
-import br.senai.sc.livros.model.service.PessoaService;
 import br.senai.sc.livros.view.Menu;
 
 import java.util.Objects;

@@ -1,12 +1,12 @@
 package br.senai.sc.livros.model.entities;
 
 public enum Status {
-    AGUARDANDO_REVISAO("Aguardando revisão"),
-    EM_REVISAO("Em revisão"),
-    REPROVADO("Reprovado"),
-    AGUARDANDO_EDICAO("Aguardando edição"),
-    APROVADO("Aprovado"),
-    PUBLICADO("Publicado");
+    AGUARDANDO_REVISAO("AGUARDANDO_REVISAO"),
+    EM_REVISAO("EM_REVISAO"),
+    REPROVADO("REPROVADO"),
+    AGUARDANDO_EDICAO("AGUARDANDO_EDICAO"),
+    APROVADO("APROVADO"),
+    PUBLICADO("PUBLICADO");
 
     String nome;
 
@@ -14,13 +14,7 @@ public enum Status {
         this.nome = nome;
     }
 
-    public static Status getStatusCorreto(String statusString) {
-        for(Status status : Status.values()) {
-            if(status.nome.equals(statusString)) {
-                return status;
-            }
-        }
-        throw new RuntimeException("Status não encontrado!");
+    public String getNome() {
+        return nome;
     }
-
 }

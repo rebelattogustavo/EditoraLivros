@@ -2,8 +2,6 @@ package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.PessoaController;
 import br.senai.sc.livros.model.entities.Genero;
-import br.senai.sc.livros.model.entities.Gerentes;
-import br.senai.sc.livros.model.entities.Pessoas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -62,12 +60,10 @@ public class CadastroPessoa extends JFrame {
         });
     }
 
-
     private void criarComponentes() {
         generoInput.setModel(new DefaultComboBoxModel(Genero.values()));
         setContentPane(cadastroPessoa);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
     }
-
 }

@@ -7,13 +7,11 @@ import br.senai.sc.livros.view.Menu;
 
 import javax.swing.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class LivrosController {
     public boolean cadastrar(String titulo, int isbn, int qtdPag, Pessoas pessoa) throws Exception {
-        Livros livro;
-        livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
+        Livros livro = Livros.cadastrar(titulo, isbn, qtdPag, (Autores) pessoa);
         if (livro != null) {
             LivroService service = new LivroService();
             return service.inserir(livro);
@@ -37,6 +35,7 @@ public class LivrosController {
             }
         } else if (usuario instanceof Revisores) {
             if (lista == 1) {
+                System.out.println(Status.AGUARDANDO_REVISAO);
                 return service.selecionarPorStatus(Status.AGUARDANDO_REVISAO);
             } else {
                 return service.selecionarPorStatus(Status.EM_REVISAO);

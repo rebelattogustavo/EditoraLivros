@@ -46,7 +46,6 @@ public class Login extends JFrame implements Runnable {
         pack();
     }
 
-
     @Override
     public void run() {
         if (!isVisible()) {
@@ -60,5 +59,4 @@ public class Login extends JFrame implements Runnable {
         Login programa = new Login();
         programa.run();
     }
-
 }

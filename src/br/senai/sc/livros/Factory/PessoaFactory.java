@@ -1,6 +1,4 @@
 package br.senai.sc.livros.Factory;
-
-import br.senai.sc.livros.model.dao.PessoaDAO;
 import br.senai.sc.livros.model.entities.*;
 
 public class PessoaFactory {

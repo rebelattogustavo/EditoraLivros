@@ -28,7 +28,7 @@ public class LivroService {
         return acesso.buscarLista();
     }
 
-    public Collection<Livros> selecionarPorAutor(Pessoas autor) throws SQLException {
+    public Collection<Livros> selecionarPorAutor(Pessoas autor) {
         return acesso.selecionarPorAutor(autor);
     }
 

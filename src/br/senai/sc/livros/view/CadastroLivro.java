@@ -1,8 +1,6 @@
 package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.LivrosController;
-import br.senai.sc.livros.controller.PessoaController;
-import br.senai.sc.livros.model.entities.Genero;
 import br.senai.sc.livros.model.entities.Livros;
 import br.senai.sc.livros.model.entities.Pessoas;
 import br.senai.sc.livros.model.service.LivroService;

@@ -2,7 +2,6 @@ package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.LivrosController;
 import br.senai.sc.livros.model.entities.*;
-import br.senai.sc.livros.model.service.LivroService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +26,7 @@ public class Estante extends JFrame {
                 LivrosController controller = new LivrosController();
                 String isbn = tabelaLivros.getValueAt(tabelaLivros.getSelectedRow(), 0).toString();
                 if (Menu.userlogged() instanceof Revisores || Menu.userlogged() instanceof Diretores) {
+                    dispose();
                     ModalStatus modalStatus = new ModalStatus(isbn);
                     modalStatus.setVisible(true);
                 } else {
@@ -41,6 +41,7 @@ public class Estante extends JFrame {
                 }
             }
         });
+
         revisarLivroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,5 +90,4 @@ public class Estante extends JFrame {
             }
         });
     }
-
 }

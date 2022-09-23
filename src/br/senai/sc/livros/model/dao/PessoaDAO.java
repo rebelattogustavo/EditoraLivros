@@ -1,7 +1,6 @@
 package br.senai.sc.livros.model.dao;
 
 import br.senai.sc.livros.Factory.ConexaoFactory;
-import br.senai.sc.livros.Factory.ConexaoFactory;
 import br.senai.sc.livros.Factory.PessoaFactory;
 import br.senai.sc.livros.model.entities.*;
 
@@ -21,7 +20,7 @@ public class PessoaDAO {
         this.conexao = new ConexaoFactory().connectionBD();
     }
 
-    public void inserir(Pessoas pessoa) throws SQLException {
+    public void inserir(Pessoas pessoa) {
         String sql = "INSERT INTO pessoas(cpf, nome, sobrenome, email, senha, genero, tipo)" +
                 " values (?,?,?,?,?,?,?)";
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
@@ -45,13 +44,7 @@ public class PessoaDAO {
             throw new RuntimeException("Erro na preparação do SQL", e);
         }
         System.out.println("Processo finalizado com sucesso!");
-        listaPessoas.add(pessoa);
     }
-
-    public void remover(Pessoas pessoa) {
-        listaPessoas.remove(pessoa);
-    }
-
 
     public Pessoas selecionarCpf(String cpf) {
         String sql = "SELECT * FROM pessoas WHERE cpf = ?";
@@ -105,15 +98,4 @@ public class PessoaDAO {
             throw new RuntimeException("Erro ao extrair objeto");
         }
     }
-
-    public void atualizar(String cpf, Pessoas pessoaAtt) {
-        for (Pessoas pessoa : listaPessoas) {
-            if (pessoa.getCpf().equals(cpf)) {
-                listaPessoas.remove(pessoa);
-                listaPessoas.add(pessoa);
-            }
-        }
-    }
-
-
 }

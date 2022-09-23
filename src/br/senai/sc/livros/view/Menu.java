@@ -102,7 +102,5 @@ public class Menu extends JFrame implements ActionListener {
                 Login login = new Login();
                 login.setVisible(true);
             }
-
-
     }
 }

@@ -1,7 +1,6 @@
 package br.senai.sc.livros.view;
 
 import br.senai.sc.livros.controller.LivrosController;
-import br.senai.sc.livros.model.entities.Autores;
 import br.senai.sc.livros.model.entities.Revisores;
 
 import javax.swing.*;
