@@ -2,17 +2,17 @@ package br.senai.sc.livros.model.dao;
 
 import br.senai.sc.livros.Factory.ConexaoFactory;
 import br.senai.sc.livros.Factory.PessoaFactory;
-import br.senai.sc.livros.model.entities.*;
+import br.senai.sc.livros.model.entities.Autores;
+import br.senai.sc.livros.model.entities.Diretores;
+import br.senai.sc.livros.model.entities.Pessoas;
+import br.senai.sc.livros.model.entities.Revisores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class PessoaDAO {
-    private static Set<Pessoas> listaPessoas = new HashSet<>();
     private Connection conexao;
 
 
